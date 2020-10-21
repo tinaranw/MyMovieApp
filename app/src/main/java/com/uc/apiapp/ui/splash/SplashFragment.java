@@ -1,28 +1,27 @@
 package com.uc.apiapp.ui.splash;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-
 import com.uc.apiapp.R;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
 public class SplashFragment extends Fragment {
 
-    @BindView(R.id.btnToMovie)
-    Button button;
+    //    @BindView(R.id.btnToMovie)
+//    Button button;
     public SplashFragment() {
         // Required empty public constructor
     }
@@ -39,9 +38,22 @@ public class SplashFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        button.setOnClickListener(view1 -> {
-            NavDirections action = SplashFragmentDirections.actionMovie();
+        new Handler().postDelayed(() -> {
+            NavDirections action = SplashFragmentDirections.actionTvToDetail();
             Navigation.findNavController(view).navigate(action);
-        });
+        }, 2000);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
     }
 }
