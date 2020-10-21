@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 
 public class DetailFragment extends Fragment {
 
-    @BindView(R.id.btnToMovieBack)
+//    @BindView(R.id.btnToMovieBack)
     Button button;
 
     public DetailFragment() {

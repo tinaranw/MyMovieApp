@@ -9,7 +9,7 @@ import com.uc.apiapp.repository.MovieRepository;
 import java.util.List;
 
 public class MovieViewModel extends ViewModel {
-    private final MovieRepository repository;
+    private MovieRepository repository;
 
     public MovieViewModel() {
         repository = MovieRepository.getInstance();

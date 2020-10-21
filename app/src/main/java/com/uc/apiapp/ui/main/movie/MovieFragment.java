@@ -6,21 +6,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.uc.apiapp.R;
+import com.uc.apiapp.adapter.MovieAdapter;
 import com.uc.apiapp.model.Movie;
-import com.uc.apiapp.ui.splash.SplashFragmentDirections;
 
 import java.util.List;
 
@@ -30,10 +28,14 @@ import butterknife.ButterKnife;
 
 public class MovieFragment extends Fragment {
 
-    @BindView(R.id.btnToDetail)
-    Button button;
+    @BindView(R.id.progressBarLoading)
+    ProgressBar loading;
+
+    @BindView(R.id.rv_movie)
+    RecyclerView rv_movie;
 
     private MovieViewModel viewModel;
+    private MovieAdapter movieAdapter;
 
     public MovieFragment() {
         // Required empty public constructor
@@ -51,28 +53,37 @@ public class MovieFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        showLoading(true);
+        movieAdapter = new MovieAdapter(getContext());
+
+        rv_movie.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rv_movie.setAdapter(movieAdapter);
 
         viewModel = ViewModelProviders.of(requireActivity()).get(MovieViewModel.class);
         viewModel.getMovieCollection().observe(requireActivity(), observeViewModel);
 
-        Movie movie= new Movie();
-
-        button.setOnClickListener(view1 -> {
-            NavDirections action = MovieFragmentDirections.actionMovieToDetail(movie);
-            Navigation.findNavController(view).navigate(action);
-        });
+//        button.setOnClickListener(view1 -> {
+//            NavDirections action = MovieFragmentDirections.actionMovieToDetail(movie);
+//            Navigation.findNavController(view).navigate(action);
+//        });
     }
 
     private Observer<List<Movie>> observeViewModel = movies -> {
         if(movies != null){
-            Movie movie = movies.get(0);
-            button.setText(movie.getTitle());
-            Toast.makeText(requireActivity(), movie.getTitle(), Toast.LENGTH_SHORT).show();
             //set adapter
-//                adapter.setMovies(movies);
-//                adapter.notifySetDataChanged();
-//                recyclerView.setAdapter(adapter);
-            //add adapter to recyclerview
+            movieAdapter.setListMovie(movies);
+            movieAdapter.notifyDataSetChanged();
+            showLoading(false);
         }
     };
+
+    private void showLoading(Boolean state) {
+        if (state) {
+            rv_movie.setVisibility(View.GONE);
+            loading.setVisibility(View.VISIBLE);
+        } else {
+            rv_movie.setVisibility(View.VISIBLE);
+            loading.setVisibility(View.GONE);
+        }
+    }
 }

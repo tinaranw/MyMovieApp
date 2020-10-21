@@ -7,6 +7,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class Movie implements Parcelable {
 
+    @SerializedName("id")
+    private String id_movie;
+
     @SerializedName("popularity")
     private String popularity;
 
@@ -14,29 +17,64 @@ public class Movie implements Parcelable {
     private String poster;
 
     @SerializedName("backdrop_path")
-    private String cover;
+    private String backdrop;
 
     @SerializedName("title")
     private String title;
 
     @SerializedName("overview")
-    private String description;
+    private String overview;
 
     @SerializedName("release_date")
     private String releaseDate;
 
-
-    public Movie(String popularity, String poster, String cover, String title, String description, String releaseDate) {
-        this.popularity = popularity;
-        this.poster = poster;
-        this.cover = cover;
-        this.title = title;
-        this.description = description;
-        this.releaseDate = releaseDate;
-    }
+    @SerializedName("vote_average")
+    private String rating;
 
     public Movie(){
 
+    }
+
+    public Movie(String id_movie, String popularity, String poster, String backdrop, String title, String overview, String releaseDate, String rating) {
+        this.id_movie = id_movie;
+        this.popularity = popularity;
+        this.poster = poster;
+        this.backdrop = backdrop;
+        this.title = title;
+        this.overview = overview;
+        this.releaseDate = releaseDate;
+        this.rating = rating;
+    }
+
+    protected Movie(Parcel in) {
+        id_movie = in.readString();
+        popularity = in.readString();
+        poster = in.readString();
+        backdrop = in.readString();
+        title = in.readString();
+        overview = in.readString();
+        releaseDate = in.readString();
+        rating = in.readString();
+    }
+
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
+
+    public String getId_movie() {
+        return id_movie;
+    }
+
+    public void setId_movie(String id_movie) {
+        this.id_movie = id_movie;
     }
 
     public String getPopularity() {
@@ -55,12 +93,12 @@ public class Movie implements Parcelable {
         this.poster = poster;
     }
 
-    public String getCover() {
-        return cover;
+    public String getBackdrop() {
+        return backdrop;
     }
 
-    public void setCover(String cover) {
-        this.cover = cover;
+    public void setBackdrop(String backdrop) {
+        this.backdrop = backdrop;
     }
 
     public String getTitle() {
@@ -71,12 +109,12 @@ public class Movie implements Parcelable {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getOverview() {
+        return overview;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setOverview(String overview) {
+        this.overview = overview;
     }
 
     public String getReleaseDate() {
@@ -87,6 +125,13 @@ public class Movie implements Parcelable {
         this.releaseDate = releaseDate;
     }
 
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
 
     @Override
     public int describeContents() {
@@ -95,32 +140,13 @@ public class Movie implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.popularity);
-        dest.writeString(this.poster);
-        dest.writeString(this.cover);
-        dest.writeString(this.title);
-        dest.writeString(this.description);
-        dest.writeString(this.releaseDate);
+        dest.writeString(id_movie);
+        dest.writeString(popularity);
+        dest.writeString(poster);
+        dest.writeString(backdrop);
+        dest.writeString(title);
+        dest.writeString(overview);
+        dest.writeString(releaseDate);
+        dest.writeString(rating);
     }
-
-    protected Movie(Parcel in) {
-        this.popularity = in.readString();
-        this.poster = in.readString();
-        this.cover = in.readString();
-        this.title = in.readString();
-        this.description = in.readString();
-        this.releaseDate = in.readString();
-    }
-
-    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
-        @Override
-        public Movie createFromParcel(Parcel source) {
-            return new Movie(source);
-        }
-
-        @Override
-        public Movie[] newArray(int size) {
-            return new Movie[size];
-        }
-    };
 }
