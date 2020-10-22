@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
+import com.uc.apiapp.util.Constants;
 
 public class TvShow implements Parcelable {
     @SerializedName("id")
@@ -18,7 +19,7 @@ public class TvShow implements Parcelable {
     @SerializedName("backdrop_path")
     private String backdrop;
 
-    @SerializedName("title")
+    @SerializedName("name")
     private String title;
 
     @SerializedName("overview")
@@ -85,7 +86,7 @@ public class TvShow implements Parcelable {
     }
 
     public String getPoster() {
-        return poster;
+        return Constants.BASE_IMAGE_URL + poster;
     }
 
     public void setPoster(String poster) {
@@ -93,7 +94,7 @@ public class TvShow implements Parcelable {
     }
 
     public String getBackdrop() {
-        return backdrop;
+        return Constants.BASE_IMAGE_URL + backdrop;
     }
 
     public void setBackdrop(String backdrop) {

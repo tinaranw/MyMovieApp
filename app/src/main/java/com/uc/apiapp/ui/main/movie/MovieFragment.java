@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.uc.apiapp.R;
 import com.uc.apiapp.adapter.MovieAdapter;
@@ -28,7 +27,7 @@ import butterknife.ButterKnife;
 
 public class MovieFragment extends Fragment {
 
-    @BindView(R.id.progressBarLoading)
+    @BindView(R.id.progressBarLoadingMovie)
     ProgressBar loading;
 
     @BindView(R.id.rv_movie)

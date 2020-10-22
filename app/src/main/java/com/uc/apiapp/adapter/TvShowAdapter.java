@@ -15,51 +15,51 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.uc.apiapp.R;
-import com.uc.apiapp.model.Movie;
-import com.uc.apiapp.ui.main.movie.MovieFragmentDirections;
+import com.uc.apiapp.model.TvShow;
+import com.uc.apiapp.ui.main.tvShow.TvShowFragmentDirections;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CardViewViewHolder> {
+public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.CardViewViewHolder> {
 
     private final Context context;
-    private List<Movie> listMovie;
-    private List<Movie> getListMovie() {
-        return listMovie;
+    private List<TvShow> listTvShow;
+    private List<TvShow> getListTvShow() {
+        return listTvShow;
     }
-    public void setListMovie(List<Movie> listMovie) {
-        this.listMovie = listMovie;
+    public void setListTvShow(List<TvShow> listTvShow) {
+        this.listTvShow = listTvShow;
     }
-    public MovieAdapter(Context context) {
-        this.listMovie = new ArrayList<Movie>();
+    public TvShowAdapter(Context context) {
+        this.listTvShow = new ArrayList<TvShow>();
         this.context = context;
     }
 
     @NonNull
     @Override
-    public MovieAdapter.CardViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TvShowAdapter.CardViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
-        return new MovieAdapter.CardViewViewHolder(view);
+        return new TvShowAdapter.CardViewViewHolder(view);
     }
 
     @SuppressLint("ResourceAsColor")
     @Override
-    public void onBindViewHolder(@NonNull final MovieAdapter.CardViewViewHolder holder, int position) {
-        Movie movie = getListMovie().get(position);
-        Glide.with(context).load(movie.getBackdrop()).into(holder.item_img);
-        holder.item_title.setText(movie.getTitle());
-        holder.item_date.setText(movie.getReleaseDate());
-        holder.item_vote.setText(movie.getRating());
+    public void onBindViewHolder(@NonNull final TvShowAdapter.CardViewViewHolder holder, int position) {
+        TvShow tvShow = getListTvShow().get(position);
+        Glide.with(context).load(tvShow.getBackdrop()).into(holder.item_img);
+        holder.item_title.setText(tvShow.getTitle());
+        holder.item_date.setText(tvShow.getReleaseDate());
+        holder.item_vote.setText(tvShow.getRating());
         holder.itemView.setOnClickListener(view -> {
-            MovieFragmentDirections.ActionMovieToDetail action = MovieFragmentDirections.actionMovieToDetail(movie,null);
+            TvShowFragmentDirections.ActionTvToDetail action = TvShowFragmentDirections.actionTvToDetail(null,tvShow);
             Navigation.findNavController(view).navigate(action);
         });
     }
     @NonNull
     @Override
     public int getItemCount() {
-        return getListMovie().size();
+        return getListTvShow().size();
     }
 
     class CardViewViewHolder extends RecyclerView.ViewHolder{

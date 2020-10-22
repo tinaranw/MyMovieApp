@@ -3,6 +3,7 @@ package com.uc.apiapp.network;
 import com.uc.apiapp.model.CastResponse;
 import com.uc.apiapp.model.GenreResponse;
 import com.uc.apiapp.model.MovieResponse;
+import com.uc.apiapp.model.TvShowResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -18,5 +19,8 @@ public interface ApiEndpoints {
 
     @GET("{type}/{id}/credits")
     Call<CastResponse> getCasts(@Path("type") String type, @Path("id") int id, @Query("api_key") String apiKey);
+
+    @GET("discover/tv")
+    Call<TvShowResponse> getTvShow(@Query("api_key")String apiKey);
 }
 
