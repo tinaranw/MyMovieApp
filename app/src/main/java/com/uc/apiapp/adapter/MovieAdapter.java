@@ -55,14 +55,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CardViewView
 //            MovieFragmentDirections.ActionDetailFragment action = MovieFragmentDirections.actionDetailFragment(movie, null);
 //            Navigation.findNavController(view).navigate(action);
 //        });
-        Log.d("Movie",movie.getPoster());
     }
 
     @Override
     public int getItemCount() {
         return getListMovie().size();
     }
-
 
     class CardViewViewHolder extends RecyclerView.ViewHolder{
         TextView item_title, item_date, item_vote;

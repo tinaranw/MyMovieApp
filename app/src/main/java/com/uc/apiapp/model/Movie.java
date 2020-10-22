@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
+import com.uc.apiapp.util.Constants;
 
 public class Movie implements Parcelable {
 
@@ -86,7 +87,7 @@ public class Movie implements Parcelable {
     }
 
     public String getPoster() {
-        return poster;
+        return Constants.BASE_IMAGE_URL + poster;
     }
 
     public void setPoster(String poster) {
@@ -94,7 +95,7 @@ public class Movie implements Parcelable {
     }
 
     public String getBackdrop() {
-        return backdrop;
+        return Constants.BASE_IMAGE_URL + backdrop;
     }
 
     public void setBackdrop(String backdrop) {
