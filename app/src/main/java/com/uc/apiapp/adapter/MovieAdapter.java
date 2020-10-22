@@ -47,14 +47,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.CardViewView
     @Override
     public void onBindViewHolder(@NonNull final MovieAdapter.CardViewViewHolder holder, int position) {
         Movie movie = getListMovie().get(position);
-        Glide.with(context).load(movie.getBackdrop()).centerCrop().into(holder.item_img);
+        Glide.with(context).load(movie.getBackdrop()).into(holder.item_img);
         holder.item_title.setText(movie.getTitle());
         holder.item_date.setText(movie.getReleaseDate());
         holder.item_vote.setText(movie.getRating());
-//        holder.itemView.setOnClickListener(view -> {
-//            MovieFragmentDirections.ActionDetailFragment action = MovieFragmentDirections.actionDetailFragment(movie, null);
-//            Navigation.findNavController(view).navigate(action);
-//        });
+        holder.itemView.setOnClickListener(view -> {
+            MovieFragmentDirections.ActionMovieToDetail action = MovieFragmentDirections.actionMovieToDetail(movie);
+            Navigation.findNavController(view).navigate(action);
+        });
     }
 
     @Override

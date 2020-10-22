@@ -53,7 +53,7 @@ public class MovieFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        showLoading(true);
+        loading(true);
         movieAdapter = new MovieAdapter(getContext());
 
         rv_movie.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -73,11 +73,11 @@ public class MovieFragment extends Fragment {
             //set adapter
             movieAdapter.setListMovie(movies);
             movieAdapter.notifyDataSetChanged();
-            showLoading(false);
+            loading(false);
         }
     };
 
-    private void showLoading(Boolean state) {
+    private void loading(Boolean state) {
         if (state) {
             rv_movie.setVisibility(View.GONE);
             loading.setVisibility(View.VISIBLE);
